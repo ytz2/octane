@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.lotto";
+option java_outer_classname = "Lotto";
+
+package lotto;
+
+service Lotto {
+  // User CRUD
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc AddUser(AddUserRequest) returns (Void);
+  rpc UpdateUser(UpdateUserRequest) returns (Void);
+  rpc DeleteUser(DeleteUserRequest) returns (Void);
+  rpc GetUsers(GetUsersRequest) returns (GetUserResponse);
+
+  // Category CRUD
+  rpc GetCategoriesByUserID(GetCategoriesByUserIDRequest) returns (Categories);
+  rpc GetCategory(GetCategoryRequest) returns (Category);
+  rpc UpdateCategory(UpdateCategoryRequest) returns (Void);
+  rpc DeleteCategory(DeleteCategoryRequest) returns (Void);
+  rpc AddCategory(AddCategoryRequest) returns (Void);
+
+  // Category CRUD
+  rpc GetContextsByCategoryID(GetContextsByCategoryIDRequest) returns (Contexts);
+  rpc GetContext(GetContextRequest) returns (Context);
+  rpc UpdateContext(UpdateContextRequest) returns (Void);
+  rpc DeleteContext(DeleteContextRequest) returns (Void);
+  rpc AddContext(AddContextRequest) returns (Void);
+}
+
+message Void {}
+
+// Users
+
+message GetUserRequest { string id = 1; }
+
+message UpdateUserRequest {
+  string id = 1;
+  string name = 2;
+}
+
+message DeleteUserRequest { string id = 1; }
+
+message AddUserRequest { string name = 1; }
+
+// The response message containing the user
+message User {
+  int64 id = 1;
+  string name = 2;
+}
+
+message GetUsersRequest {
+  int32 page_size = 1; // per page
+  string id = 2; // start from
+}
+
+message GetUserResponse {
+   repeated User users = 1;
+   string next_id = 2;
+}
+
+// Categories
+
+message GetCategoriesByUserIDRequest {
+ string userID = 1;
+}
+
+message GetCategoryRequest {
+ string categoryID = 1;
+}
+
+message UpdateCategoryRequest{
+  string id = 1;
+  string userId = 2;
+  string name =3;
+}
+
+message DeleteCategoryRequest{
+ string id = 1;
+}
+
+message AddCategoryRequest{
+  string userId = 1;
+  string name = 2;
+}
+
+message Category {
+  int64 id = 1;
+  string name = 2;
+  int64 userId = 3;
+}
+
+message Categories {
+   repeated Category categories = 1;
+}
+
+// Contexts
+message Context {
+    int64 id = 1;
+    string name = 2;
+    string note = 3;
+    int64 userID=4;
+    int64 categoryID=5;
+}
+
+message Contexts{
+    repeated Context contexts = 1;
+}
+
+message GetContextsByCategoryIDRequest{
+    string categoryID = 1;
+}
+
+message GetContextRequest{
+    string contextID = 1;
+}
+
+message UpdateContextRequest{
+    int64 id = 1;
+    string name = 2;
+    string note = 3;
+    int64 userID=4;
+    int64 categoryID=5;
+}
+
+message DeleteContextRequest{
+    string contextID = 1;
+}
+
+message AddContextRequest{
+    string name = 2;
+    string note = 3;
+    int64 userID=4;
+    int64 categoryID=5;
+}
+

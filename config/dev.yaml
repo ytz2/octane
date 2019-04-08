@@ -1,0 +1,55 @@
+appname: octane
+grpc:
+    port:     50551
+db:
+    name:     lotto
+    user:     root
+    password: 112233
+    uri:      127.0.0.1
+    port:     3307
+ratelimit:
+    - burst: 5
+      name: GetUser
+      limit: 10
+    - burst: 5
+      name: GetUsers
+      limit: 10
+    - burst: 5
+      name: UpdateUser
+      limit: 10
+    - burst: 5
+      name: DeleteUser
+      limit: 10
+    - burst: 5
+      name: AddUser
+      limit: 10
+    - burst: 5
+      name: GetCategoriesByUserID
+      limit: 10
+    - burst: 5
+      name: GetCategory
+      limit: 10
+    - burst: 5
+      name: UpdateCategory
+      limit: 10
+    - burst: 5
+      name: DeleteCategory
+      limit: 10
+    - burst: 5
+      name: AddCategory
+      limit: 10
+    - burst: 5
+      name: GetContextsByCategoryID
+      limit: 10
+    - burst: 5
+      name: GetContext
+      limit: 10
+    - burst: 5
+      name: UpdateContext
+      limit: 10
+    - burst: 5
+      name: DeleteContext
+      limit: 10
+    - burst: 5
+      name: AddContext
+      limit: 10
