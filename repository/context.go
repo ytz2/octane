@@ -9,7 +9,11 @@ import (
 // GetContextsByCategoryID ...
 func (l *lottoMySQL) GetContextsByCategoryID(ctx context.Context, categoryID string) ([]record.Context, error) {
 	var contexts []record.Context
-	err := combineErrors(l.DB.Where("category_id = ?", categoryID).Find(&contexts).GetErrors())
+	//err := combineErrors(l.DB.Where("category_id = ?", categoryID).Find(&contexts).GetErrors())
+	err := l.DB.Joins("join category on category.id = context.category_id").Where("context.category_id = ?", categoryID).Find(&contexts).Error
+	for i, _ := range contexts {
+		l.DB.Model(contexts[i]).Related(&contexts[i].Category)
+	}
 	if err != nil {
 		return contexts, err
 	}
