@@ -19,7 +19,8 @@ func (l *lottoMySQL) GetContextsByCategoryID(ctx context.Context, categoryID str
 // GetContext ...
 func (l *lottoMySQL) GetContext(ctx context.Context, contextId string) (*record.Context, error) {
 	var con record.Context
-	err := combineErrors(l.DB.Where("id = ?", contextId).First(&con).GetErrors())
+	//err := combineErrors(l.DB.Where("id = ?", contextId).First(&con).GetErrors())
+	err := combineErrors(l.DB.Where("id = ?", contextId).Preload("Category").First(&con).GetErrors() )
 	if err == nil {
 		return &con, nil
 	}

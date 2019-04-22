@@ -30,6 +30,7 @@ type Context struct {
 	Note       string
 	UserID     int `gorm:"column:user_id;index"`
 	CategoryID int `gorm:"column:category_id;index"`
+	Category   Category `gorm:"foreignkey:CategoryID;association_foreignkey:ID"`
 }
 
 // TableName ...
