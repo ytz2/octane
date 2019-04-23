@@ -49,13 +49,18 @@ func main() {
 	db.Create(&Category{Name: "cat1"}).Create(&Category{Name: "cat2"})
 
 	// create contexts
-	db.Create(&Context{Name: "c1", UserID: 1, CategoryID: 1}).Create(&Context{Name: "c2", UserID: 1, CategoryID: 2}).Create(&Context{Name: "c3", UserID: 2, CategoryID: 1}).Create(&Context{Name: "c4", UserID: 2, CategoryID: 2})
+	db.Create(&Context{Name: "c1", UserID: 1, CategoryID: 1}).
+		Create(&Context{Name: "c2", UserID: 1, CategoryID: 2}).
+		Create(&Context{Name: "c3", UserID: 2, CategoryID: 1}).
+		Create(&Context{Name: "c4", UserID: 2, CategoryID: 2}).
+		Create(&Context{Name: "c5", UserID: 2, CategoryID: 2})
 
 	var res []Context
 	db.Joins("JOIN users on users.id = contexts.user_id").
 		Joins("JOIN categories on categories.id = contexts.category_id").
 		Where("categories.name=?", "cat2").
-		Where("users.name=?", "user2").
+		Where("users.name=? or users.name=?", "user2", "user1").
+		Order("contexts.id desc").
 		Preload("User").
 		Preload("Category").
 		Find(&res)
