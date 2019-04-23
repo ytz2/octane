@@ -56,6 +56,14 @@
   revision = "04140366298a54a039076d798123ffa108fff46c"
 
 [[projects]]
+  digest = "1:4a49346ca45376a2bba679ca0e83bec949d780d4e927931317904bad482943ec"
+  name = "github.com/mattn/go-sqlite3"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c7c4067b79cc51e6dfdcef5c702e74b1e0fa7c75"
+  version = "v1.10.0"
+
+[[projects]]
   digest = "1:3c1a69cdae3501bf75e76d0d86dc6f2b0a7421bc205c0cb7b96b19eed464a34d"
   name = "go.uber.org/atomic"
   packages = ["."]
@@ -223,6 +231,7 @@
     "github.com/golang/protobuf/proto",
     "github.com/jinzhu/configor",
     "github.com/jinzhu/gorm",
+    "github.com/mattn/go-sqlite3",
     "go.uber.org/fx",
     "golang.org/x/net/context",
     "golang.org/x/time/rate",
